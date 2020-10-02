@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- Defining Bean here -->
+	<bean id="trackCoach"
+		class="com.example.prince.TrackCoach" scope="prototype" init-method="doMyStartupStuff" destroy-method="doMyCleanupStuff">
+		<!-- Setup Constructor Injection -->
+		<constructor-arg ref="happyFortuneService"/>
+		
+		</bean>
+		
+		<!-- Defining Bean here -->
+	<bean id="happyFortuneService"
+		class="com.example.prince.HappyFortuneService" />
+	
+		
+			<!-- Defining Logger Bean here -->
+	<bean id="myLogger" class="com.example.prince.MyLogger" init-method="initLogger">
+    	<property name="rootLoggerLevel" value="FINE" />
+    	<property name="printedLoggerLevel" value="FINE"/>
+    </bean>
+    
+    <!-- Defining bean for calling destroy method on prototype scope -->
+    <!-- Bean custom processor to handle calling destroy methods on prototype scoped beans -->
+        <bean id="customProcessor"
+    		class="com.example.prince.MyCustomBeanProcessor" destroy-method="destroy">
+   	</bean>
+</beans>
+
+
+
+
+

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Load the Property File  -->
+	<context:property-placeholder location="classpath:sports.properties" />
+
+
+	<!-- Defining Bean here -->
+	<bean id="trackCoach"
+		class="com.example.prince.TrackCoach" >
+		<!-- Setup Constructor Injection -->
+		<constructor-arg ref="happyFortuneService"/>
+		
+		</bean>
+		
+		<!-- Defining Bean here -->
+	<bean id="baseballCoach"
+		class="com.example.prince.BaseballCoach">
+		
+		<!-- Setup Constructor Injection -->
+		<constructor-arg ref="happyFortuneService"/>
+		
+		</bean>
+	
+		<!-- Defining Bean here -->
+		<bean id="cricketCoach"
+		class="com.example.prince.CricketCoach">
+		
+		<!-- Setup setter Injection -->
+		<property name="fortuneService" ref="happyFortuneService"></property>
+		
+		<!-- Injecting Literal values  -->
+		<property name="emailAddress" value="cricketcoach@gmail.com"/>
+		<property name="team" value="Chennai Super Kings"/>
+		</bean>
+	
+	
+	<!-- Defining Bean here -->
+		<bean id="tennisCoach"
+		class="com.example.prince.TennisCoach">
+		
+		<!-- Setup setter Injection -->
+		<property name="fortuneService" ref="happyFortuneService"></property>
+		
+		<!-- Injecting Literal values  -->
+		<property name="emailAddress" value="${foo.email}"/>
+		<property name="team" value="${foo.team}"/>
+		</bean>
+	
+		<!-- Defining Bean here -->
+	<bean id="happyFortuneService"
+		class="com.example.prince.HappyFortuneService" />
+	
+		
+			<!-- Defining Logger Bean here -->
+	<bean id="myLogger" class="com.example.prince.MyLogger" init-method="initLogger">
+    	<property name="rootLoggerLevel" value="FINE" />
+    	<property name="printedLoggerLevel" value="FINE"/>
+    </bean>
+</beans>
+
+
+
+
+
